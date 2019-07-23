@@ -2,7 +2,8 @@
   "name": "dolphengine",
   "version": "0.0.1",
   "description": "An experimental port of DolphEngine to TypeScript",
-  "main": "index.js",
+  "private": true,
+  "main": "lib/index.js",
   "scripts": {
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
@@ -13,6 +14,7 @@
   "author": "dolphinspired",
   "repository": "https://github.com/dolphinspired/dolphengine.js",
   "license": "MIT",
+  "types": "lib/index.d.ts",
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
@@ -23,8 +25,12 @@
     "@babel/plugin-transform-modules-commonjs": "^7.5.0",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
+    "@webpack-cli/init": "^0.2.2",
+    "source-map-loader": "^0.2.4",
     "tslint": "^5.18.0",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
   }
 }

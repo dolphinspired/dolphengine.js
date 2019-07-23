@@ -4,6 +4,9 @@
     "tslint-config-airbnb"
   ],
   "jsRules": {},
-  "rules": {},
+  "rules": {
+    "no-trailing-whitespace": false,
+    "eofline": false
+  },
   "rulesDirectory": []
 }
