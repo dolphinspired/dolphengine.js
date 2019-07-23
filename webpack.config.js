@@ -31,7 +31,9 @@ module.exports = {
   },
 
   devServer: {
-    open: true
+    open: false,
+    openPage: '/app/index.html',
+    writeToDisk: true
   },
 
   resolve: {

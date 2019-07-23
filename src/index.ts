@@ -1,1 +1,7 @@
-console.log('Hello World from your main file!');
+console.log('Main file loaded.');
+
+document.addEventListener('DOMContentLoaded', (ev: Event) => {
+  window.setInterval(() => {
+    // console.log('Hiya');
+  }, 100);
+});

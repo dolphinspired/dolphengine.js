@@ -6,7 +6,9 @@
   "jsRules": {},
   "rules": {
     "no-trailing-whitespace": false,
-    "eofline": false
+    "eofline": false,
+    "space-before-function-paren": false,
+    "align": false
   },
   "rulesDirectory": []
 }
