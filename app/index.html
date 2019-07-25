@@ -2,11 +2,20 @@
 <html>
   <head>
     <script src="../lib/main.js"></script>
+    <style>
+      canvas {
+        /* Disables highlight on tap for mobile browsers */
+        -webkit-tap-highlight-color: transparent;
+      }
+    </style>
   </head>
   <body>
     <h1>Test Page</h1>
     <div>
-      <canvas width="640" height="480" style="border: 1px solid gray"></canvas>
+      <canvas width="640" height="480" style="border: 1px solid gray" id="gameWindow"></canvas>
+    </div>
+    <div id="output">
+
     </div>
   </body>
 </html>
