@@ -8,7 +8,10 @@
     "no-trailing-whitespace": false,
     "eofline": false,
     "space-before-function-paren": false,
-    "align": false
+    "align": false,
+    "variable-name": false,
+    "ter-arrow-parens": false,
+    "no-increment-decrement": false
   },
   "rulesDirectory": []
 }
