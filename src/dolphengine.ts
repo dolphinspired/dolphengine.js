@@ -3,7 +3,6 @@ import { Timer } from './timer';
 
 export class DolphEngine {
   static showDebug: boolean;
-  static canvasId: string;
 
   static failCount = 0;
 
@@ -13,20 +12,7 @@ export class DolphEngine {
       return;
     }
 
-    if (!this.canvasId) {
-      this.log('Failed to start - no canvasId provided!');
-      return;
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
-      const canvas = window.document.getElementById(this.canvasId) as HTMLCanvasElement;
-      if (!canvas) {
-        this.log(`No canvas found with id '${this.canvasId}'!`);
-        return;
-      }
-
-      game.canvas = canvas;
-
       this.log('Starting init');
       game.init();
       this.log('Finished init');

@@ -1,7 +1,6 @@
 import { Timer } from './timer';
 
 export abstract class Game {
-  canvas: HTMLCanvasElement;
   timer: Timer;
 
   // tslint:disable-next-line: function-name
