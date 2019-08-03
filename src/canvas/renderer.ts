@@ -6,7 +6,7 @@ import { Position2d } from '../core/structs/2d/position';
 export class CanvasRenderer extends DirectiveRenderer {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D;
-  private transparent = Color32.fromRGB(128, 128, 128);
+  private transparent = Color32.fromRGBA(255, 255, 255, 0);
 
   constructor(canvasId: string) {
     super();
@@ -29,7 +29,7 @@ export class CanvasRenderer extends DirectiveRenderer {
 
   protected onBeforeDraw(): boolean {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.context.fillStyle = this.transparent.toHexString();
+    this.context.fillStyle = this.transparent.hex;
     return true;
   }
 
@@ -47,7 +47,7 @@ export class CanvasRenderer extends DirectiveRenderer {
     const start = dir.startPosition || new Position2d(0, 0);
     const lineColor = dir.lineColor || this.transparent;
 
-    this.context.fillStyle = lineColor.toHexString();
+    this.context.strokeStyle = lineColor.hex;
     this.context.beginPath();
 
     let i = 0;
@@ -59,10 +59,11 @@ export class CanvasRenderer extends DirectiveRenderer {
       }
       i++;
     });
+    this.context.stroke();
 
     if (dir.fillColor) {
       this.context.closePath();
-      this.context.fillStyle = dir.fillColor.toHexString();
+      this.context.fillStyle = dir.fillColor.hex;
       this.context.fill();
     }
   }

@@ -30,8 +30,8 @@ export class MyGame extends Game {
         [10, 100],
         [10, 10],
       ),
-      lineColor: Color32.fromHex('#0000FF'),
-      fillColor: Color32.fromHex('#FF0000'),
+      lineColor: Color32.fromHex('#0000FF80'),
+      fillColor: Color32.fromHex('#FF000080'),
       startPosition: new Position2d(20, 20),
     });
     this.channel.directives.push(this.poly);
@@ -48,7 +48,6 @@ export class MyGame extends Game {
 
   render(): void {
     this.renderer.draw();
-    this.div.innerHTML = `Time: ${this.timer.total}`;
   }
 }
 
