@@ -1,7 +1,7 @@
 import { DolphEngine } from './dolphengine';
 import { Game } from './game';
 import { DirectiveChannel } from './graphics/directive-renderer';
-import { PolygonDirective } from './graphics/directives';
+import { PolygonDirective, TextDirective } from './graphics/directives';
 import { Position2d, Polygon2d, Offset2d } from './core';
 import { Color32 } from './core/structs/color';
 import { CanvasRenderer } from './canvas/renderer';
@@ -14,6 +14,7 @@ export class MyGame extends Game {
   renderer: CanvasRenderer;
   channel: MyChannel;
   poly: PolygonDirective;
+  text: TextDirective;
 
   init(): void {
     this.div = document.getElementById('output') as HTMLElement;
@@ -34,7 +35,12 @@ export class MyGame extends Game {
       lineColor: Color32.fromHex('#0000FF80'),
       fillColor: Color32.fromHex('#FF000080'),
     });
-    this.channel.directives.push(this.poly);
+    this.text = new TextDirective({
+      text: 'Whaddup',
+      dest: new Position2d(20, 200),
+      font: '36px Helvetica',
+    });
+    this.channel.directives.push(this.poly, this.text);
   }
 
   update(): void {

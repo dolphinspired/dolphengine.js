@@ -1,4 +1,4 @@
-import { Color32 } from '../../../core';
+import { Color32, Position2d } from '../../../core';
 import { DrawDirective } from '../draw';
 
 export class TextDirective implements DrawDirective {
@@ -7,10 +7,12 @@ export class TextDirective implements DrawDirective {
     this.text = p.text;
     this.font = p.font;
     this.color = p.color;
+    this.dest = p.dest;
   }
 
   directive = 'text';
   text: string;
   font: string;
   color: Color32;
+  dest: Position2d;
 }

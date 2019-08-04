@@ -6,7 +6,10 @@ import { Vector2d } from '../core/structs/2d/vector';
 export class CanvasRenderer extends DirectiveRenderer {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D;
-  private transparent = Color32.fromRGBA(255, 255, 255, 0);
+
+  private readonly colorTransparent = Color32.fromRGBA(255, 255, 255, 0);
+  private readonly colorBlack = Color32.fromRGB(0, 0, 0);
+  private readonly defaultFont = '12px sans-serif';
 
   constructor(canvasId: string) {
     super();
@@ -29,12 +32,13 @@ export class CanvasRenderer extends DirectiveRenderer {
 
   protected onBeforeDraw(): boolean {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.context.fillStyle = this.transparent.hex;
+    this.context.fillStyle = this.colorTransparent.hex;
+    this.context.font = this.defaultFont;
     return true;
   }
 
   private drawSprite(dir: SpriteDirective) {
-
+    // todo: handle sprite directive
   }
 
   private drawPolygon(dir: PolygonDirective) {
@@ -46,7 +50,7 @@ export class CanvasRenderer extends DirectiveRenderer {
 
     const points = dir.polygon.original.points;
     const start = dir.polygon.offset || new Vector2d(0, 0);
-    const lineColor = dir.lineColor || this.transparent;
+    const lineColor = dir.lineColor || this.colorTransparent;
 
     this.context.strokeStyle = lineColor.hex;
     this.context.beginPath();
@@ -70,6 +74,27 @@ export class CanvasRenderer extends DirectiveRenderer {
   }
 
   private drawText(dir: TextDirective) {
+    if (!dir.text) {
+      // No text to draw
+      return;
+    }
 
+    let x = 0;
+    let y = 0;
+    const font = dir.font || this.defaultFont;
+    const color = dir.color || this.colorBlack;
+
+    if (dir.dest) {
+      if (dir.dest.x) {
+        x = dir.dest.x;
+      }
+      if (dir.dest.y) {
+        y = dir.dest.y;
+      }
+    }
+
+    this.context.font = font;
+    this.context.fillStyle = color.hex;
+    this.context.fillText(dir.text, x, y);
   }
 }
