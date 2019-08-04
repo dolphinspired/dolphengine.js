@@ -1,4 +1,4 @@
-import { Polygon2d, Color32, Position2d } from '../../../core';
+import { Polygon2d, Color32, Position2d, Offset2d } from '../../../core';
 import { DrawDirective } from '../draw';
 
 export class PolygonDirective implements DrawDirective {
@@ -7,12 +7,10 @@ export class PolygonDirective implements DrawDirective {
     this.fillColor = p.fillColor;
     this.lineColor = p.lineColor;
     this.polygon = p.polygon;
-    this.startPosition = p.startPosition;
   }
 
   directive = 'polygon';
   fillColor: Color32;
   lineColor: Color32;
-  polygon: Polygon2d;
-  startPosition: Position2d;
+  polygon: Offset2d<Polygon2d>;
 }

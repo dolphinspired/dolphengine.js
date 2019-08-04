@@ -1,7 +1,7 @@
 import { DirectiveRenderer } from '../graphics/directive-renderer';
 import { SpriteDirective, PolygonDirective, TextDirective } from '../graphics/directives';
 import { Color32 } from '../core';
-import { Position2d } from '../core/structs/2d/position';
+import { Vector2d } from '../core/structs/2d/vector';
 
 export class CanvasRenderer extends DirectiveRenderer {
   private canvas: HTMLCanvasElement;
@@ -38,13 +38,14 @@ export class CanvasRenderer extends DirectiveRenderer {
   }
 
   private drawPolygon(dir: PolygonDirective) {
-    if (!dir.polygon || !dir.polygon.points || !dir.polygon.points.length
+    if (!dir.polygon || !dir.polygon.original
+      || !dir.polygon.original.points || !dir.polygon.original.points.length
       || (!dir.fillColor && !dir.lineColor)) {
       return;
     }
 
-    const points = dir.polygon.points;
-    const start = dir.startPosition || new Position2d(0, 0);
+    const points = dir.polygon.original.points;
+    const start = dir.polygon.offset || new Vector2d(0, 0);
     const lineColor = dir.lineColor || this.transparent;
 
     this.context.strokeStyle = lineColor.hex;

@@ -1,5 +1,5 @@
 import { DrawDirective } from '../draw';
-import { Rect2d } from '../../../core';
+import { Rect2d, Offset2d } from '../../../core';
 
 export class SpriteDirective implements DrawDirective {
   constructor(p?: Partial<SpriteDirective>) {
@@ -11,6 +11,6 @@ export class SpriteDirective implements DrawDirective {
 
   directive = 'sprite';
   asset: string;
-  source: Rect2d;
-  dest: Rect2d;
+  source: Offset2d<Rect2d>;
+  dest: Offset2d<Rect2d>;
 }

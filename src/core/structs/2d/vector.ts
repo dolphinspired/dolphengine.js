@@ -7,6 +7,16 @@ export class Vector2d {
     this.y = y || 0;
   }
 
+  moveTo(x: number, y: number): void {
+    this.x = x;
+    this.y = y;
+  }
+
+  shift(x: number, y: number): void {
+    this.x += x;
+    this.y += y;
+  }
+
   scale(x: number, y: number): void {
     this.x *= x;
     this.y *= y;
