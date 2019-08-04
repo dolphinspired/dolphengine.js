@@ -1,10 +1,7 @@
 export class Color32 {
   private static readonly regHex = /^[A-Fa-f0-9]+$/;
 
-  private r: number;
-  private g: number;
-  private b: number;
-  private a: number;
+  private readonly raw: Uint8Array;
 
   private h: string;
   private h_refresh: boolean;
@@ -12,10 +9,8 @@ export class Color32 {
   //#region Constructors
 
   constructor(r: number, g: number, b: number, a: number) {
-    this.red = r;
-    this.green = g;
-    this.blue = b;
-    this.alpha = a;
+    this.raw = new Uint8Array([r, g, b, a]);
+    this.h_refresh = true;
   }
 
   static fromHex(hex: string): Color32 {
@@ -42,55 +37,43 @@ export class Color32 {
   //#region Properties
 
   get red(): number {
-    return this.r;
+    return this.raw[0];
   }
 
   set red(value: number) {
-    const adjusted = Math.trunc(value) % 256;
-    if (adjusted !== this.r) {
-      this.r = adjusted;
-      this.h_refresh = true;
-    }
+    this.raw[0] = value;
+    this.h_refresh = true;
   }
 
   get green(): number {
-    return this.g;
+    return this.raw[1];
   }
 
   set green(value: number) {
-    const adjusted = Math.trunc(value) % 256;
-    if (adjusted !== this.g) {
-      this.g = adjusted;
-      this.h_refresh = true;
-    }
+    this.raw[1] = value;
+    this.h_refresh = true;
   }
 
   get blue(): number {
-    return this.b;
+    return this.raw[2];
   }
 
   set blue(value: number) {
-    const adjusted = Math.trunc(value) % 256;
-    if (adjusted !== this.b) {
-      this.b = adjusted;
-      this.h_refresh = true;
-    }
+    this.raw[2] = value;
+    this.h_refresh = true;
   }
 
   get alpha(): number {
-    return this.a;
+    return this.raw[3];
   }
 
   set alpha(value: number) {
-    const adjusted = Math.trunc(value) % 256;
-    if (adjusted !== this.a) {
-      this.a = adjusted;
-      this.h_refresh = true;
-    }
+    this.raw[3] = value;
+    this.h_refresh = true;
   }
 
   get opacity(): number {
-    return this.alpha / 255;
+    return this.raw[3] / 255;
   }
 
   set opacity(value: number) {
@@ -109,10 +92,10 @@ export class Color32 {
   set hex(value: string) {
     if (value !== this.h) {
       const result = Color32.parseHex(value);
-      this.r = result.r;
-      this.g = result.g;
-      this.b = result.b;
-      this.a = result.a;
+      this.raw[0] = result.r;
+      this.raw[1] = result.g;
+      this.raw[2] = result.b;
+      this.raw[3] = result.a;
       this.h_refresh = true;
     }
   }
@@ -126,10 +109,10 @@ export class Color32 {
     // but this could be made configurable in such a way that any desired format
     // is set on refresh
     this.h = '#';
-    this.h += Color32.to2charHexString(this.r);
-    this.h += Color32.to2charHexString(this.g);
-    this.h += Color32.to2charHexString(this.b);
-    this.h += Color32.to2charHexString(this.a);
+    this.h += Color32.to2charHexString(this.raw[0]);
+    this.h += Color32.to2charHexString(this.raw[1]);
+    this.h += Color32.to2charHexString(this.raw[2]);
+    this.h += Color32.to2charHexString(this.raw[3]);
   }
 
   private static parseHex(hex: string): { r: number, g: number, b: number, a: number } {
